@@ -1,0 +1,45 @@
+name = The Lafayette Digital Repository Theme
+description = Digital Scholarship Services sub-theme
+core = 7.x
+base theme = bootstrap
+
+; For testing (similar syntax for modules)
+; files[] = tests/bootstrap_dss_islandora_dev.test
+
+scripts[] = 'js/bootstrap_helper.js'
+scripts[] = 'js/advanced_search_modal.js'
+
+; This must be specified for unit testing!
+testing_api = 2.x
+
+; Regions
+regions[navigation]     = 'Navigation'
+
+; For styling the Simple Search block
+regions[simple_search]	  = 'Simple Search'
+
+; For the advanced search modeless dialog (implements the Bootstrap "modal" feature)
+; Refactor?
+regions[search_modal]     = 'Advanced Search Modal'
+
+; For offering Shibboleth, OAuth2...
+regions[auth]	  = 'Authentication'
+; For sharing content over Facebook, Twitter, Google...
+regions[share]	  = 'Content Sharing'
+; For the contact form modal
+regions[contact]  = 'Contact Interface'
+
+regions[header]         = 'Top Bar'
+regions[highlighted]    = 'Highlighted'
+regions[help]           = 'Help'
+regions[content]        = 'Content'
+regions[sidebar_first]  = 'Primary'
+regions[sidebar_second] = 'Secondary'
+regions[footer]         = 'Footer'
+regions[hidden]         = 'Hidden'
+
+; Stylesheets
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/islandora_solr.css
+stylesheets[all][] = css/modal.css
+stylesheets[all][] = css/sharethis.css
