@@ -2,14 +2,10 @@
 
   <div class="navbar-header">
 
-   <!-- <h2><?php print empty($site_name) ? 'Digital Collections at Lafayette College' : $site_name ?></h2> -->
-
    <!-- Refactor into hook_preprocess_page -->
    <h2><?php print l('Skillman Library', 'http://library.lafayette.edu/'); ?> at <?php print l('Lafayette College', 'http://www.lafayette.edu/'); ?></h2>
-   
-   <?php if(!empty($title)): ?>
-    <h1><?php print $title; ?></h1>
-   <?php endif; ?>
+
+    <h1><?php print l('Lafayette Digital Repository', '', array('absolute' => TRUE)); ?></h1>
   </div>
 
   <div class="navbar-inner">
@@ -22,7 +18,8 @@
       </a>
     </div>
 
-    <div class="container">
+    <!-- <div class="container navbar-inner-container"> -->
+    <div class="navbar-inner-container">
 
       <?php if (!empty($site_name)): ?>
         <h1 id="site-name">
@@ -31,6 +28,7 @@
       <?php endif; ?>
 
       <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
+
         <div class="nav-collapse collapse">
           <nav role="navigation">
             <?php if (!empty($primary_nav)): ?>
@@ -44,60 +42,47 @@
             <?php if (!empty($page['navigation'])): ?>
               <?php print render($page['navigation']); ?>
             <?php endif; ?>
+</div><!-- /.nav-collapse -->
 
-   <div class="auth-share-simple-search-container container">
-
-   <?php if (!empty($page['simple_search'])): ?>
-
-     <?php print render($page['simple_search']); ?>
-   <?php endif; ?>
-
-   <div class="auth-share-container container">
-
-     <div class="auth-container modal-container container">
-       <div id="auth-control-container" class="modal-control-container container">
-
-        <?php if (!empty($page['auth'])): ?>
-   
-	  <div class="auth-icon"><span class="icon-large icon-user"></span></div>
-	  <div class="auth-link"><?php print $auth_anchor; ?></div>
-        <?php else: ?>
-
-          <!-- By default $user_picture is <span class="icon-large icon-user"></span> -->
-          <div class="auth-icon"><?php print $user_picture; ?></div>
-          <div class="auth-link"><?php print $logout_anchor; ?></div>
-        <?php endif; ?>
-       </div><!-- /#auth-control-container -->
-     </div><!-- /.auth-container -->
-
-     <div class="share-container modal-container container">
-
-       <div id="share-control-container" class="modal-control-container container">
-
-         <div class="share-icon"><i class="icon-large icon-share"></i></div>
-         <?php print $share_anchor; ?>
-       </div><!-- /#share-control-container -->
-     </div><!-- /.share-container -->
-
-  </div><!-- /.auth-share-container -->
-  </div>
-
-</div>
-
-          </nav>
-        </div>
+          </nav><!-- /.navigation -->
+        </div><!-- /.nav-collapse collapse -->
       <?php endif; ?>
-    </div>
-  </div>
 
-</header>
+   <div class="auth-share-simple-search-container">
+
+     <?php if (!empty($page['simple_search'])): ?>
+
+       <?php print render($page['simple_search']); ?>
+     <?php endif; ?>
+   </div><!-- /.auth-share-simple-search-container -->
+
+  <div class="menu-toggle-container container">
+
+    <?php if (isset($menu_toggle_container)): ?>
+
+      <?php print $menu_toggle_container; ?>
+
+      <div class="auth-share-container container">
+
+        <?php print $search_container; ?>
+
+        <?php print $auth_container; ?>
+        <?php print $share_container; ?>
+
+      </div><!-- /.auth-share-container -->
+
+
+
+    <?php endif; ?>
+  </div><!-- /.menu-toggle-container -->
+</div><!-- /.navbar-inner -->
+
+</header><! --/.navbar -->
 
 <div class="main-container container">
 
   <header role="banner" id="page-header">
-    <?php if (!empty($site_slogan)): ?>
-      <p class="lead"><?php print $site_slogan; ?></p>
-    <?php endif; ?>
+   <p class="lead"><?php print l($title, current_path()); ?></p>
 
     <?php print render($page['header']); ?>
   </header> <!-- /#header -->
@@ -108,14 +93,14 @@
       <aside class="span3" role="complementary">
         <?php print render($page['sidebar_first']); ?>
       </aside>  <!-- /#sidebar-first -->
-    <?php endif; ?>  
+    <?php endif; ?>
 
-    <section class="<?php print _bootstrap_content_span($columns); ?>">  
+    <section class="<?php print _bootstrap_content_span($columns); ?>">
       <?php if (!empty($page['highlighted'])): ?>
         <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
       <?php endif; ?>
 
-<div id="breadcrumb-container">
+    <div id="breadcrumb-container">
       <?php if (!empty($breadcrumb)): ?>
 
 	<?php print $breadcrumb; ?>
@@ -126,7 +111,8 @@
       <div id="contact-container" class="breadcrumb" ><?php print $contact_anchor; ?></div>
       <div id="copyright-container" class="breadcrumb" ><?php print l('Copyright Information', 'copyright'); ?></div>
       </div>
-</div>
+    </div>
+
 
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
@@ -190,4 +176,3 @@
 <footer class="footer container">
   <?php print render($page['footer']); ?>
 </footer>
-

@@ -1,0 +1,152 @@
+
+/**
+ * Tablet-specific styling
+ *
+ */
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+
+    div.auth-share-simple-search-container {
+
+	width: 54%;
+    }
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+
+    div.auth-share-simple-search-container {
+
+	width: 54%;
+    }
+}
+
+/**
+ * Smartphone-specific styling
+ *
+ */
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+
+    #simple-search-item {
+
+	/* width: 100%; */
+	border-left: 0px;
+    }
+
+    #simple-search-item #islandora-solr-simple-search-form {
+
+	/* width: 71.5%; */
+	margin-left: auto;
+	margin-right: auto;
+    }
+
+    #simple-search-item #islandora-solr-simple-search-form div a {
+
+	margin-left: auto;
+    }
+
+    div.navbar-header h2 {
+	
+	display: none;
+    }
+
+    div.navbar-header h1 a {
+
+	font-size: x-large;
+    }
+
+    .navbar .logo {
+
+	margin-left: inherit;
+    }
+
+
+    /**
+     * Refactor: disable the simple search block for smartphones
+     */
+
+
+    .region-simple-search {
+
+	display: none;
+    }
+
+
+    /**
+     * Refactor: remove the navbar padding for smartphones
+     */
+
+    .navbar-inner {
+
+	padding-left: 0px;
+	padding-right: 0px;
+    }
+
+    .modal-container.container,
+    .modal-control-container.container {
+
+	margin: 0 2px;
+	width: auto;
+    }
+
+    .modal-control-container div span {
+
+	font-size: 0.88em;
+    }
+
+    .logo-container a img {
+
+	height: 50px;
+    }
+
+    /**
+     * For dev
+     *
+     */
+
+    div.navbar-collapse-toggle div span.btn-navbar {
+
+	display: none !important;
+    }
+
+    div.simple-search-icon img {
+
+	height: 32px;
+    }
+
+    /**
+     * Placement of blocks for smartphones
+     *
+     * Overrides for dss_digital
+     */
+
+    html.js body.html div.main-container div.row-fluid section.span12 section#block-aggregator-feed-2.block,
+    html.js body.html div.main-container div.row-fluid section.span12 section#block-nodeblock-7.block {
+	
+	float: none !important;
+    }
+
+    body {
+
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    body > * {
+
+        padding-left: 20px;
+	padding-right: 20px;
+    }
+
+    header {
+
+	padding-left: 0px;
+	padding-right: 0px;
+    }
+}

@@ -21,6 +21,12 @@ div.main-container {
     /* margin-top: 1.9%; */
 }
 
+.islandora-solr-facet-pages-wrapper {
+
+    background-color: #ffffff;
+    padding: 8px;
+}
+
 header#navbar {
 
     background-color: #ffffff;
@@ -50,6 +56,53 @@ div.navbar-header h2 {
       */
 }
 
+.nav-tabs {
+
+    margin-bottom: 0px;
+}
+
+.nav-tabs > li > a {
+
+    background-color: #cccccc;
+    border-color: #ffffff;
+}
+
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+#block-system-navigation .menu.nav a {
+
+    font-size: large;
+    padding: 0px 0px 6px;
+    color: #CDD3CD;
+}
+
+.well {
+
+    padding: 12px;
+}
+
+.well section {
+
+    margin-top: 6px;
+}
+
+.well section#block-islandora-solr-facet-pages-islandora-solr-facet-pages {
+
+    background-color: #ffffff;
+}
+
+.well .block {
+
+    background-color: #590000;
+    border-radius: 4px 4px 4px 4px;
+    padding: 6px;
+}
+
 /* Remove the backdrop */
 /* Work-around; refactor */
 div.modal-backdrop.fade.in {
@@ -58,34 +111,7 @@ div.modal-backdrop.fade.in {
     z-index: -10000;
 }
 
-.auth-share-simple-search-container {
 
-    float: right;
-    width: 380px;
-}
-
-div.auth-share-container.container {
-
-    /*
-    width: 11%;
-    */
-
-    /*
-    width: 32%;
-    float: right;
-    */
-    width: 380px;
-    margin-top: 0px;
-}
-
-div.auth-icon,
-div.share-icon {
-
-    border: 2px solid;
-    height: 40px;
-    width: 40px;
-    margin: auto;
-}
 
 div.modal-container.container {
 
@@ -125,49 +151,6 @@ div.modal-container.container {
     float:right;
 }
 
-a:hover, a:focus {
-
-    color: #ffffff;
-    text-decoration: underline;
-}
-
-.breadcrumb {
-
-    background-color: #808080;
-    border: 1px solid #000000;
-}
-
-article {
-
-    background-color: #ffffff;
-    padding: 5px;
-    border: 1px solid #000000;
-
-}
-
-article a {
-
-    color: #0088CC;
-    text-shadow: none;
-}
-
-aside {
-
-    background-color: #808080;
-    border: 1px solid #000000;
-    padding: 8px;
-}
-
-aside h2.block-title {
-
-    color: #CCCCCC;
-}
-
-.islandora-solr-facet-pages-list {
-
-    color: #ffffff;
-}
-
 .nav.nav-tabs,
 .node.node-page {
 
@@ -196,28 +179,7 @@ aside h2.block-title {
     margin-left: 20%;
 }
 
-.affix {
 
-    position: fixed;
-    top: 0px;
-    width: 97%;
-}
-
-.affix-top {
-
-    /*
-    position: fixed;
-    */
-    /*
-    top: 22%;
-    */
-}
-
-.affix-bottom {
-
-    position: absolute;
-    top: 0px;
-}
 
 #block-menu-menu-footer-menu {
 
@@ -330,9 +292,75 @@ html.js body.html header#navbar.navbar div.navbar-inner div.container div.nav-co
 body {
 
     padding-top: inherit;
+    background-color: #590000;
+}
 
-    background-color: #807e6f;
-    background-image: url('../files/mooning/mooning.png');
+article {
+
+    background-color: #ffffff;
+    padding: 8px;
+}
+
+header#page-header {
+
+    color: #CDD3CD;
+}
+
+.breadcrumb {
+
+    background-color: #cccccc;
+    border-bottom: 1px solid #4C4C45;
+    border-left: 1px solid #ADA86B;
+    border-top: 1px solid #ADA86B;
+}
+
+.breadcrumb a {
+
+    color: #404040;
+}
+
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+
+    color: #990000;
+    text-decoration: none;
+}
+
+#block-menu-menu-footer-menu {
+
+    background-color: #CCCCCC;
+    border-bottom: 1px solid #4C4C45;
+    border-left: 1px solid #ADA86B;
+    border-top: 1px solid #ADA86B;
+}
+
+#block-menu-menu-footer-menu .menu {
+
+    margin-top: 10px;
+}
+
+#block-menu-menu-footer-menu a {
+
+    color: #404040;
+}
+
+#block-menu-menu-footer-menu a:hover,
+#block-menu-menu-footer-menu a:focus {
+
+    color: #990000;
+    text-decoration: none;
+}
+
+
+
+.main-container section.block-aggregator .block-title {
+
+    text-align: center;
+}
+
+.main-container section.span9 section#block-nodeblock-7 h2.block-title {
+
+    font-size: large;
 }
 
 .navbar-header {
@@ -352,16 +380,94 @@ body {
     margin-bottom: inherit;
 }
 
-.region-footer {
+/**
+ * DSS Islandora East Asia Image Collections Solution Pack
+ *
+ */
+.islandora-page-metadata-wrapper {
 
-    border: 1px solid #000000;
-    background-color: #808080;
+    background-color: #ffffff;
+    padding: 8px;
 }
 
-.region-footer .menu {
+/**
+ * Bootstrap carousel for page--front Node
+ *
+ */
 
-    margin-top: 6px;
-    margin-bottom: 6px;
+.carousel-caption {
+
+    padding: 4px;
+}
+
+.carousel-caption h2 {
+
+    font-size: large;
+    color: #ffffff;
+}
+
+/**
+ * Islandora Basic Collection Solution Pack
+ *
+ */
+.islandora-basic-collection-wrapper {
+
+    background-color: #ffffff;
+    padding: 8px;
+}
+
+.islandora-basic-collection-thumb {
+
+    text-align: center;
+}
+
+/**
+ * Islandora Solr module
+ *
+ */
+#islandora-solr-top,
+.islandora-solr-content {
+
+    background-color: #ffffff;
+    padding: 8px;
+}
+
+dl.solr-thumb {
+
+    width: 200px;
+    text-align: center;
+}
+
+dl.solr-fields {
+
+    width: 72%;
+}
+
+dd.solr-value {
+
+    padding-left: 68px;
+}
+
+/**
+ * Islandora Book Solution Pack
+ *
+ */
+
+.islandora-book-pages-grid dl {
+
+    display: inline-block;
+    margin: 1.5em 1.84%;
+    min-height: 180px;
+    min-width: 100px;
+    vertical-align: top;
+    width: 20%;
+    text-align: center;
+}
+
+.islandora-book-pages {
+
+    background-color: #ffffff;
+    padding: 8px;
 }
 
 /**
@@ -374,12 +480,6 @@ body {
 .islandora-simple-search-button-container {
 
     /* display: inline !important; */
-}
-
-a {
-
-    color: #FFFFFF;
-    text-shadow: -1px 0.5px 1px #444444;
 }
 
 /* Added by Thom */
@@ -423,10 +523,18 @@ input#edit-islandora-simple-search-query.form-text {
 
 .navbar-inner {
 
-    background-image: linear-gradient(to bottom, #f2f0e0, #cac6ac);
-    background-image: linear-gradient(to bottom, #545454, #333333);
+    /*
+      807e6f
+      */
+    background-image: linear-gradient(to bottom, #cac6ac, #807e6f);
+    /* background-image: linear-gradient(to bottom, #f2f0e0, #cac6ac); */
     border: none;
     border-radius: 0px;
+}
+
+.navbar-inner a {
+
+    color: #2d2d27;
 }
 
 /* add margin to left of advanced link */
@@ -486,6 +594,12 @@ html.js body.html header#navbar.navbar div.navbar-header h1{
 html.js body.html header#navbar.navbar div.navbar-inner div.logo-container a img{
 	
 	height:65px;
+}
+
+a {
+
+    /* font-family: 'Roboto', sans-serif; */
+    color: #0000A0;
 }
 
 /* adjust margin above search elements */

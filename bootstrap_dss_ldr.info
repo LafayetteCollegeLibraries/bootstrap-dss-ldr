@@ -1,13 +1,16 @@
 name = The Lafayette Digital Repository Theme
 description = Digital Scholarship Services sub-theme
 core = 7.x
-base theme = bootstrap
+base theme = bootstrap_lafayette_lib_dss
 
 ; For testing (similar syntax for modules)
 ; files[] = tests/bootstrap_dss_islandora_dev.test
 
+scripts[] = 'js/bootstrap.min.js'
+
 scripts[] = 'js/bootstrap_helper.js'
 scripts[] = 'js/advanced_search_modal.js'
+scripts[] = 'js/sharethis_helper.js'
 
 ; This must be specified for unit testing!
 testing_api = 2.x
@@ -39,7 +42,26 @@ regions[footer]         = 'Footer'
 regions[hidden]         = 'Hidden'
 
 ; Stylesheets
+
+; Bootstrap core (modified in order to avoid locally compiling LESS)
+stylesheets[all][] = css/bootstrap.min.css
+
+; Base theme
 stylesheets[all][] = css/style.css
-stylesheets[all][] = css/islandora_solr.css
+stylesheets[all][] = css/header.css
+stylesheets[all][] = css/bootstrap_navbar.css
+stylesheets[all][] = css/mobile/bootstrap_navbar_mobile.css
+stylesheets[all][] = css/mobile/modal_mobile.css
+
+stylesheets[all][] = css/lafayette_lib_dss_page.css
+
+; JavaScript
 stylesheets[all][] = css/modal.css
 stylesheets[all][] = css/sharethis.css
+
+; Islandora
+stylesheets[all][] = css/islandora_solr.css
+stylesheets[all][] = css/islandora_book.css
+
+; (To be integrated)
+stylesheets[all][] = css/dss_ldr.css

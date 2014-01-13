@@ -266,7 +266,6 @@
       // Refactor
       //this.holdsFocus = false;
 
-
       // Set the handler 'click.dismiss.modal' for the specified element to LafayetteDssModal.hide()
       // This needs to support more than one hide closure
       this.$element = $(element);
@@ -281,7 +280,7 @@
       // Refactor
       $(document).mousedown(function(e) {
 
-	      $(document).data('LafayetteDssModal', {$lastTarget: $(e.target)});
+	      $(document).data('LafayetteDssModal', {$lastTarget: $(e.target), $element: this.$element});
 	  });
 
       if (this.options) this.options.remote && this.$element.find('.modal-body').load(this.options.remote);
@@ -291,6 +290,10 @@
       this.widthOffset = parseInt(this.options.widthOffset);
       this.heightOffset = parseInt(this.options.heightOffset);
       this.anchorAlign = this.options.anchorAlign;
+
+      // Should not be parsing this string for the user agent
+      // Refactor
+      this.isSmartPhoneAgent = /Android.*?(?:Mobile)|iPhone|Windows Mobile/i.test(navigator.userAgent) || ($(window).width() == 320 && $(window).height == 480) || ($(window).width() == 480 && $(window).height == 320);
   };
 
   /**
@@ -316,7 +319,7 @@
 	  var options = $.extend(options, { direction: 'up' });
 
 	  // Adjust the z-index in order to avoid overlapping issues
-	  that.$element.css('z-index', Math.floor( new Date().getTime() / 10000 % 2 * 1000  ));
+	  that.$element.css('z-index', Math.floor( new Date().getTime() / 10000 % 2 * 100000  ));
 
 	  // Possible recursion
 	  var e = $.Event('show');
@@ -358,41 +361,45 @@
 
 	  that.$element.find('form').submit(function(e) {
 
-		  e.preventDefault();
+		  // @todo Refactor for a specific DOM class
+		  if($(this).attr('id') != 'islandora-dss-solr-advanced-search-form') {
 
-		  $(document).data('LafayetteDssModal.lastForm', $(this));
-		  /*
-		    $(document).data('LafayetteDssModal.lastForm.Id', $(this).attr('id'));
-		  */
+		      e.preventDefault();
 
-		  if(!$(this).find('.required').filter(function(i, e) {
+		      $(document).data('LafayetteDssModal.lastForm', $(this));
+		      /*
+			$(document).data('LafayetteDssModal.lastForm.Id', $(this).attr('id'));
+		      */
 
-			      return $(this).val() == '';
-			  }).length) {
+		      if(!$(this).find('.required').filter(function(i, e) {
 
-			      $.post($(this).attr('action'), $(this).serialize(), function(data, textStatus) {
+				  return $(this).val() == '';
+			      }).length) {
 
+			  $.post($(this).attr('action'), $(this).serialize(), function(data, textStatus) {
+				  
+				  that.hide();
+			      }).fail(function(data) {
+				      
+				      console.log('error');
 				      that.hide();
-				  }).fail(function(data) {
-			      
-					  console.log('error');
-					  that.hide();
-				      });
-		  } else {
-
-		      $('<div class="alert alert-block alert-error"><a href="#" data-dismiss="alert" class="close">×</a><h4 class="element-invisible">Error message</h4><ul><li>Your Name field is required.</li><li>Your E-Mail Address field is required.</li><li>Subject field is required.</li><li>Message field is required.</li></ul></div>').hide().prependTo($(this).prev())
-			  .show($.extend('slide', { direction: 'down' }, function() {
-			  //.show($.extend('drop', options, function() {
-
-					  setTimeout(function() {
+				  });
+		      } else {
+			  
+			  $('<div class="alert alert-block alert-error"><a href="#" data-dismiss="alert" class="close">×</a><h4 class="element-invisible">Error message</h4><ul><li>Your Name field is required.</li><li>Your E-Mail Address field is required.</li><li>Subject field is required.</li><li>Message field is required.</li></ul></div>').hide().prependTo($(this).prev())
+			      .show($.extend('slide', { direction: 'down' }, function() {
+					  //.show($.extend('drop', options, function() {
 					  
+					  setTimeout(function() {
+						  
 						  //$(document).data('LafayetteDssModal.lastForm').parent().find('.alert').hide('scale');
 						  $(document).data('LafayetteDssModal.lastForm').parent().find('.alert').hide('slide', { direction: 'up' });
 						  //$(document).data('LafayetteDssModal.lastForm').parent().find('.alert').hide('drop', { direction: 'up' });
 					      }, 1500 );
 					  //}}));
-				  }));
-
+				      }));
+			  
+		      }	      
 		  }
 	      });
 
@@ -406,6 +413,7 @@
 
 	  that.$element.addClass('shown');
 	  var $navbar = $('.navbar-inner');
+	  $(document).data('LafayetteDssModal.navbar.offset.top', $navbar.offset().top);
 
 	  if(that.anchorAlign) {
 
@@ -415,22 +423,33 @@
 	      */
 
 	      that.$element.css('top', Math.floor( ($target.offset().top - $target[0].offsetWidth / 4) + that.heightOffset));
-	      that.$element.css('left', Math.floor( ($target.offset().left - that.shownWidth + $target.width() + $target[0].offsetWidth / 4) + that.widthOffset));
+
+	      if(that.isSmartPhoneAgent) {
+
+		  that.$element.css('left', 'auto');
+	      } else {
+
+		  that.$element.css('left', Math.floor( ($target.offset().left - that.shownWidth + $target.width() + $target[0].offsetWidth / 4) + that.widthOffset));
+	      }
 	  } else {
 
 	      // Ensure that the widget is always appended directly underneath the navbar
 
-	      var $navbar = $('.navbar-inner');
+	      //var $navbar = $('.navbar-inner');
 	      that.$element.css('top', $navbar.offset().top + $navbar.height());
-	      that.$element.css('left', 0);
+	      //that.$element.css('left', 0);
+	      //that.$element.css('margin-left', '33.3%');
+
 	  }
 
 	  //transition ?
 	  //that.$element.one($.support.transition.end, function () { that.$element.focus().trigger('shown') }) :
 	  that.$element.focus().trigger('shown');
 
+	  that.$element.insertAfter($('.navbar-inner'));
+
 	  //that.$element.show('drop', {direction: 'up'}, 500, function() {
-	  that.$element.show({effect: 'slide', direction: 'down', easing: 'easeInExpo', duration: 500, complete: function() {
+	  that.$element.show({effect: 'slide', direction: 'up', duration: 500, complete: function() {
 
 		  //$._data($(this)[0], 'events');
 
@@ -443,6 +462,9 @@
 			  that.hide();
 		      }, 3000);
 		  */
+
+	          //$(document).data('LafayetteDssModal.offset.top', $(this).offset().top);
+	          $(document).data('LafayetteDssModal.' + $(this).attr('id') + '.offset.top', $(this).offset().top);
 
 		  $(this).find('input.form-text:first').focus();
 
@@ -485,6 +507,53 @@
 				      }
 				  }, 3000);
 			  });
+
+		  /**
+		   * For handling when scrolling while a modal is open
+		   *
+		   */
+		  $(window).scroll(function() {
+
+			  $('.lafayette-dss-modal.shown').each(function(i,e) {
+
+			      //var offsetTop = $(document).data('LafayetteDssModal.offset.top');
+			      var offsetTop = $(document).data('LafayetteDssModal.' + $(e).attr('id') + '.offset.top');
+
+			      var navbarOffsetTop = $('.navbar-inner').offset().top;
+			      if(! $(document).data('LafayetteDssModal.navbar.offset.top') || $(window).scrollTop() == 0) {
+
+				  $(document).data('LafayetteDssModal.navbar.offset.top', navbarOffsetTop);
+
+				  if( $(window).scrollTop() == 0 ) {
+				  //if( $('.navbar-inner.affix').length == 0 ) {
+
+				      $(e).css('top', offsetTop );
+				  }
+			      }
+
+			      if($(window).scrollTop() < navbarOffsetTop) {
+
+				  $(e).css('top', offsetTop );
+			      }
+
+			      var $navbar = $('.navbar-inner.affix');
+
+			      if($navbar.length > 0) {
+
+				  //$(e).css('top', $(e).offset().top + $(window).scrollTop());
+				  $(e).css('top', offsetTop + $(window).scrollTop() - $(document).data('LafayetteDssModal.navbar.offset.top') );
+			      }
+			  });
+
+			  /*
+			  var activeElement = $(document).data('LafayetteDssModal').$element;
+
+			  if(activeElement) {
+
+			     activeElement.css('top', activeElement.css('top') + $(window).scrollTop());
+			  }
+			  */
+		      });
 		  //});
 		  }});
 
@@ -558,6 +627,12 @@
 	  this.$element
           .removeClass('in')
           .attr('aria-hidden', true);
+
+	  // Hide any nested popover widgets
+	  this.$element.find('[data-toggle="popover"]').each(function(i,e) {
+
+		  $(e).popover('hide');
+	      });
 
 	  //$.support.transition && this.$element.hasClass('fade') ? this.hideWithTransition() : this.hideModal();
 	  //this.hideWithTransition();
